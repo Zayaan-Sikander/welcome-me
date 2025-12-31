@@ -164,10 +164,34 @@ function handleInteraction(e) {
     createBalloonShower(x, y);
 }
 
+// Letter by letter text reveal
+function animateText() {
+    const reveals = document.querySelectorAll('.reveal');
+    let totalDelay = 200; // Start after 200ms
+
+    reveals.forEach((element) => {
+        const text = element.textContent;
+        element.textContent = '';
+        element.style.opacity = '1';
+
+        // Split into letters
+        [...text].forEach((char, i) => {
+            const span = document.createElement('span');
+            span.className = 'letter';
+            span.textContent = char === ' ' ? '\u00A0' : char; // Preserve spaces
+            span.style.animationDelay = `${totalDelay + (i * 40)}ms`;
+            element.appendChild(span);
+        });
+
+        totalDelay += text.length * 40 + 150; // Gap between elements
+    });
+}
+
 // Initialize
 document.addEventListener('DOMContentLoaded', () => {
     startBalloons();
     startSparkles();
+    animateText();
 
     // Add click/touch listeners
     document.addEventListener('click', handleInteraction);
