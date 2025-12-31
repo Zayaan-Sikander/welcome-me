@@ -1,0 +1,345 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    min-height: 100vh;
+    font-family: 'Quicksand', sans-serif;
+    overflow: hidden;
+    cursor: pointer;
+    position: relative;
+}
+
+.background-gradient {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(135deg,
+        #fdf6f0 0%,
+        #e8f4f8 25%,
+        #f0e6f6 50%,
+        #fef9e7 75%,
+        #e8f8f5 100%);
+    background-size: 400% 400%;
+    animation: gradientShift 15s ease infinite;
+    z-index: -3;
+}
+
+@keyframes gradientShift {
+    0%, 100% { background-position: 0% 50%; }
+    50% { background-position: 100% 50%; }
+}
+
+/* Main Content */
+.content {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+    padding: 20px;
+    position: relative;
+    z-index: 10;
+}
+
+.welcome-card {
+    text-align: center;
+    padding: 50px 40px;
+    background: rgba(255, 255, 255, 0.85);
+    backdrop-filter: blur(10px);
+    border-radius: 30px;
+    box-shadow:
+        0 20px 60px rgba(0, 0, 0, 0.08),
+        0 0 0 1px rgba(255, 255, 255, 0.5) inset;
+    max-width: 500px;
+    width: 100%;
+    animation: cardFloat 6s ease-in-out infinite;
+}
+
+@keyframes cardFloat {
+    0%, 100% { transform: translateY(0); }
+    50% { transform: translateY(-10px); }
+}
+
+.intro-text {
+    font-size: 1.1rem;
+    color: #9b8aa6;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    margin-bottom: 15px;
+    font-weight: 500;
+}
+
+.name {
+    font-family: 'Playfair Display', serif;
+    font-size: 4.5rem;
+    font-weight: 700;
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 50%, #f093fb 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    margin-bottom: 20px;
+    animation: shimmer 3s ease-in-out infinite;
+}
+
+@keyframes shimmer {
+    0%, 100% { filter: brightness(1); }
+    50% { filter: brightness(1.2); }
+}
+
+.divider {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: 12px 0;
+}
+
+.star {
+    font-size: 1.5rem;
+    color: #d4af37;
+    animation: starTwinkle 2s ease-in-out infinite;
+}
+
+@keyframes starTwinkle {
+    0%, 100% { opacity: 1; transform: scale(1); }
+    50% { opacity: 0.6; transform: scale(0.9); }
+}
+
+.welcome-text {
+    font-family: 'Playfair Display', serif;
+    font-size: 1.8rem;
+    color: #5a5a7a;
+    margin-bottom: 15px;
+    font-weight: 400;
+}
+
+.date {
+    font-size: 1.2rem;
+    color: #d4af37;
+    font-weight: 500;
+    letter-spacing: 3px;
+}
+
+/* Parents Section */
+.parents {
+    margin-bottom: 5px;
+}
+
+.parents-text {
+    font-family: 'Playfair Display', serif;
+    font-size: 1.4rem;
+    color: #5a5a7a;
+    margin-bottom: 5px;
+}
+
+.parent-name {
+    font-weight: 600;
+    font-style: italic;
+    background: linear-gradient(135deg, #d4af37 0%, #f0d78c 50%, #d4af37 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+}
+
+.parents-label {
+    font-size: 1rem;
+    color: #9b8aa6;
+    font-weight: 400;
+    letter-spacing: 1px;
+}
+
+/* Balloons Container */
+#balloons-container {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    pointer-events: none;
+    z-index: 1;
+    overflow: hidden;
+}
+
+.balloon {
+    position: absolute;
+    bottom: -150px;
+    width: 50px;
+    height: 65px;
+    border-radius: 50% 50% 50% 50%;
+    animation: floatUp linear infinite;
+    opacity: 0.9;
+}
+
+.balloon::before {
+    content: '';
+    position: absolute;
+    bottom: -8px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 0;
+    height: 0;
+    border-left: 8px solid transparent;
+    border-right: 8px solid transparent;
+    border-top: 15px solid inherit;
+}
+
+.balloon::after {
+    content: '';
+    position: absolute;
+    bottom: -60px;
+    left: 50%;
+    width: 1px;
+    height: 50px;
+    background: rgba(150, 150, 150, 0.5);
+}
+
+@keyframes floatUp {
+    0% {
+        transform: translateY(0) rotate(0deg);
+        opacity: 0;
+    }
+    10% {
+        opacity: 0.9;
+    }
+    90% {
+        opacity: 0.9;
+    }
+    100% {
+        transform: translateY(-120vh) rotate(15deg);
+        opacity: 0;
+    }
+}
+
+/* Sparkles */
+#sparkles-container {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    pointer-events: none;
+    z-index: 2;
+}
+
+.sparkle {
+    position: absolute;
+    width: 8px;
+    height: 8px;
+    background: radial-gradient(circle, #fff 0%, #ffd700 50%, transparent 70%);
+    border-radius: 50%;
+    animation: sparkleAnim 2s ease-in-out infinite;
+}
+
+@keyframes sparkleAnim {
+    0%, 100% { transform: scale(0); opacity: 0; }
+    50% { transform: scale(1); opacity: 1; }
+}
+
+/* Confetti */
+#confetti-container {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    pointer-events: none;
+    z-index: 100;
+}
+
+.click-balloon {
+    position: absolute;
+    pointer-events: none;
+    transform: translate(-50%, -50%);
+}
+
+@keyframes balloonBurst {
+    0% {
+        transform: translate(-50%, -50%) translateX(0) translateY(0) rotate(0deg) scale(0);
+        opacity: 0;
+    }
+    20% {
+        opacity: 0.95;
+        transform: translate(-50%, -50%) translateX(calc(var(--spread-x) * 0.3)) translateY(-50px) rotate(calc(var(--wobble) * 0.5)) scale(1);
+    }
+    100% {
+        transform: translate(-50%, -50%) translateX(var(--spread-x)) translateY(-300px) rotate(var(--wobble)) scale(0.8);
+        opacity: 0;
+    }
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+    .welcome-card {
+        padding: 40px 30px;
+        margin: 10px;
+        border-radius: 25px;
+    }
+
+    .name {
+        font-size: 3.2rem;
+    }
+
+    .intro-text {
+        font-size: 0.9rem;
+        letter-spacing: 1px;
+    }
+
+    .welcome-text {
+        font-size: 1.4rem;
+    }
+
+    .date {
+        font-size: 1rem;
+        letter-spacing: 2px;
+    }
+
+    .balloon {
+        width: 40px;
+        height: 52px;
+    }
+}
+
+@media (max-width: 480px) {
+    .welcome-card {
+        padding: 35px 25px;
+    }
+
+    .name {
+        font-size: 2.5rem;
+    }
+
+    .intro-text {
+        font-size: 0.8rem;
+    }
+
+    .welcome-text {
+        font-size: 1.2rem;
+    }
+
+    .date {
+        font-size: 0.9rem;
+    }
+
+    .parents-text {
+        font-size: 1.1rem;
+    }
+
+    .parents-label {
+        font-size: 0.85rem;
+    }
+}
+
+/* Touch feedback for mobile */
+@media (hover: none) {
+    .welcome-card {
+        animation: none;
+    }
+
+    .welcome-card:active {
+        transform: scale(0.98);
+        transition: transform 0.1s ease;
+    }
+}
